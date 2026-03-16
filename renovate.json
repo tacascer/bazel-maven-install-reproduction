@@ -1,1 +1,3 @@
-{}
+{
+  "enabledManagers": ["bazel", "bazel-module", "bazelisk"]
+}
