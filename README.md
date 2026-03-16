@@ -1,16 +1,12 @@
-# minimal-reproduction-template
-
-First, read the [Renovate minimal reproduction instructions](https://github.com/renovatebot/renovate/blob/main/docs/development/minimal-reproductions.md).
-
-Then replace the current `h1` with the Renovate Issue/Discussion number.
+# Renovate does not update Maven artifacts in `rules_jvm_external` `maven.install()`
 
 ## Current behavior
 
-Explain the current behavior here.
+Renovate does not detect or update Maven artifact versions declared in `maven.install()` in `MODULE.bazel`. For example, `com.google.guava:guava:33.4.0-jre` is never flagged for update.
 
 ## Expected behavior
 
-Explain the expected behavior here.
+Renovate should detect Maven artifact versions in `maven.install()` and propose updates when newer versions are available (e.g., guava 33.4.0-jre -> 33.5.1-jre).
 
 ## Link to the Renovate issue or Discussion
 
