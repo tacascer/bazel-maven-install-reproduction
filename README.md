@@ -10,4 +10,4 @@ Renovate should detect Maven artifact versions in `maven.install()` and propose 
 
 ## Link to the Renovate issue or Discussion
 
-Put your link to the Renovate issue or Discussion here.
+https://github.com/renovatebot/renovate/discussions/27467
