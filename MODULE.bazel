@@ -11,5 +11,8 @@ maven.install(
         "com.google.guava:guava:33.4.0-jre",
     ],
     lock_file = "//:maven_install.json",
+    repositories = [
+        "https://repo1.maven.org/maven2/",
+    ],
 )
 use_repo(maven, "maven")

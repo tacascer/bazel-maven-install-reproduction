@@ -1,12 +1,24 @@
-# Renovate does not update Maven artifacts in `rules_jvm_external` `maven.install()`
+# Renovate + Bazel `maven.install()` reproduction
 
-## Current behavior
+Minimal reproduction showing that Renovate **can** detect and update Maven artifacts in `rules_jvm_external` `maven.install()` — but only when the `repositories` parameter is explicitly set.
 
-Renovate does not detect or update Maven artifact versions declared in `maven.install()` in `MODULE.bazel`. For example, `com.google.guava:guava:33.4.0-jre` is never flagged for update.
+## Key finding
 
-## Expected behavior
+Without an explicit `repositories` field in `maven.install()`, Renovate's `bazel-module` manager has no registry URL to query and silently skips Maven dependency updates. Adding `repositories` pointing to Maven Central fixes this:
 
-Renovate should detect Maven artifact versions in `maven.install()` and propose updates when newer versions are available (e.g., guava 33.4.0-jre -> 33.5.1-jre).
+```starlark
+maven.install(
+    artifacts = [
+        "com.google.guava:guava:33.4.0-jre",
+    ],
+    lock_file = "//:maven_install.json",
+    repositories = [
+        "https://repo1.maven.org/maven2/",
+    ],
+)
+```
+
+With the `repositories` field present, Renovate correctly proposes updating guava from `33.4.0-jre` to `33.5.0-jre`.
 
 ## Link to the Renovate issue or Discussion
 
